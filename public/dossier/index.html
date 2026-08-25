@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>ABiL · Dossier</title>
+<link rel="stylesheet" href="https://use.typekit.net/opg3hrq.css">
+<style>
+/* ══════════════════════════════════════════════════════════════════
+   ABiL internal dossier, designed with the v3 site system.
+   It uses the live type scale, uppercase tracking, compact paragraphs,
+   two percent margins, animated rules, black ink on canvas and citron
+   as the only accent colour.
+   ══════════════════════════════════════════════════════════════════ */
+:root{
+  --noir:#0a0a0b; --alpin:#ffffff; --tela:#efefef; --leman:#c7c7c7;
+  --rhone:#7e7e7e; --citron:#d2ff01; --violette:#be8efc;
+  --hair:rgba(10,10,11,.16);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--tela);color:var(--noir);
+  font-family:"mundial","Figtree","Helvetica Neue",sans-serif;font-weight:300;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+img{max-width:100%}
+button{font:inherit;background:none;border:0;cursor:pointer;color:inherit}
+a{color:inherit;text-decoration:none}
+::selection{background:var(--citron);color:var(--noir)}
+
+/* Typography scale used by the live v3 site */
+.xl,.l,.m,.s,.xs,.xxs{text-transform:uppercase;letter-spacing:-.03em;margin-left:-.03em;line-height:1}
+.xl{font-size:clamp(46px,7vw,120px);line-height:.84;font-weight:300}
+.l{font-size:clamp(34px,4.86vw,84px);line-height:.84;font-weight:300}
+.m{font-size:clamp(22px,2.8vw,48px);line-height:.9;font-weight:300}
+.s{font-size:clamp(15px,1.5vw,26px);line-height:1;font-weight:400}
+.xs{font-size:14px;line-height:1.2;font-weight:400;letter-spacing:-.01em;margin-left:0}
+.xxs{font-size:12px;line-height:1.17;font-weight:400;letter-spacing:.02em;margin-left:0}
+.p{font-size:clamp(15px,1.111vw,18px);line-height:1.35;font-weight:300;letter-spacing:-.01em;text-transform:none}
+.grey{color:var(--rhone)}
+.mono{font-family:"SF Mono",ui-monospace,Menlo,Consolas,monospace;font-size:12.5px;letter-spacing:0;text-transform:none}
+
+.margin{padding-left:2vw;padding-right:2vw}
+
+/* Reveal effects used by the v3 visual language */
+.wm{display:inline-block;overflow:hidden;vertical-align:top;padding:.12em .06em .18em;margin:-.12em -.06em -.18em}
+.w{display:inline-block;transform:translateY(130%);transition:transform 1.5s cubic-bezier(.075,.82,.165,1);transition-delay:var(--d,0s)}
+.io.in .w{transform:translateY(0)}
+.fillw{height:1px;background:var(--noir);width:0;transition:width 1s cubic-bezier(.3,.3,0,1);transition-delay:var(--d,0s)}
+.io.in .fillw{width:100%}
+.fadeup{opacity:0;transform:translateY(34px);transition:opacity 1s cubic-bezier(.075,0,.165,0),transform 1.4s cubic-bezier(.075,.82,.165,1);transition-delay:var(--d,0s)}
+.io.in .fadeup{opacity:1;transform:translateY(0)}
+@media print,(prefers-reduced-motion:reduce){
+  .w,.fadeup{transform:none !important;opacity:1 !important;transition:none !important}
+  .fillw{width:100% !important;transition:none !important}
+}
+
+/* Links with an animated underline */
+.lnk{position:relative;padding-bottom:2px;text-transform:uppercase;cursor:pointer;display:inline-block;white-space:nowrap}
+.lnk:after{content:"";position:absolute;width:100%;height:1px;bottom:0;left:0;transform:scaleX(0);
+  transform-origin:bottom right;transition:transform .3s;background:currentColor}
+.lnk:hover:after,.lnk.on:after{transform:scaleX(1);transform-origin:bottom left}
+
+/* Access gate */
+#gate{position:fixed;inset:0;z-index:900;background:var(--noir);color:var(--alpin);
+  display:flex;flex-direction:column;justify-content:space-between;padding:2vw}
+#gate.hid{display:none}
+#gate .g-top{display:flex;justify-content:space-between;align-items:center}
+#gate .g-mid{max-width:680px}
+#gate .g-mid .xl{color:var(--citron)}
+#gate .g-form{display:flex;gap:14px;align-items:center;margin-top:4vw;max-width:420px}
+#gate input{flex:1;background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.35);
+  color:var(--alpin);font:inherit;font-size:16px;padding:10px 2px;letter-spacing:.14em;text-transform:uppercase;outline:none}
+#gate input:focus{border-color:var(--citron)}
+#gate .g-go{background:var(--citron);color:var(--noir);border-radius:999px;padding:12px 26px;
+  font-size:12px;letter-spacing:.04em;text-transform:uppercase;font-weight:400}
+#gate .g-err{color:var(--citron);min-height:18px;margin-top:12px}
+#gate .g-foot{display:flex;justify-content:space-between;color:var(--rhone)}
+
+/* Fixed 56 pixel navigation bar */
+.nav{position:fixed;top:0;left:0;right:0;height:56px;z-index:400;background:var(--citron);color:var(--noir);
+  display:grid;grid-template-columns:auto 1fr auto;column-gap:2vw;align-items:center;padding:0 2vw}
+.nav .n-logo{display:flex;align-items:center;gap:8px}
+.nav .n-logo img{height:19.4px;width:auto;display:block}
+.nav .n-doc{overflow:hidden}
+.nav .n-doc span{display:inline-block}
+.nav .n-langs{display:flex;gap:4px}
+.nav .n-langs button{padding:5px 9px;border-radius:999px;font-size:11px;letter-spacing:.04em;font-weight:400}
+.nav .n-langs button.on{background:var(--noir);color:var(--citron)}
+
+/* Hero */
+.hero{padding:calc(56px + 9vh) 2vw 0}
+.hero .kick{margin-bottom:3.2vw;display:flex;gap:14px;align-items:center}
+.hero .kick .dot{width:7px;height:7px;border-radius:99px;background:var(--noir);display:inline-block}
+.hero h1{max-width:14ch}
+.hero .h-grid{display:grid;grid-template-columns:repeat(12,1fr);column-gap:2vw;margin-top:3.4vw;align-items:end}
+.hero .h-sub{grid-column:1/6;max-width:520px}
+.hero .h-note{grid-column:8/13;color:var(--rhone)}
+.stats{margin-top:4.6vw;border-top:1px solid var(--noir)}
+.stats .st-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:2vw}
+.stats .st{padding:1.6vw 0 2vw;border-right:1px solid var(--hair)}
+.stats .st:last-child{border-right:0}
+.stats .st .m{margin-bottom:8px}
+.stats .st .xxs{color:var(--rhone)}
+
+/* Document index */
+.idx{margin-top:0;border-top:1px solid var(--noir);border-bottom:1px solid var(--noir);
+  display:flex;gap:2.4vw;flex-wrap:wrap;padding:14px 2vw;position:sticky;top:56px;z-index:300;background:var(--tela)}
+.idx a{font-size:12px;letter-spacing:.02em;font-weight:400;text-transform:uppercase}
+.idx .num{color:var(--rhone);margin-right:5px}
+
+/* Sections */
+.sec{padding:7vw 2vw 2vw}
+.sec .head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:2vw;align-items:baseline;margin-bottom:1.2vw}
+.sec .head .hn{grid-column:1/2}
+.sec .head h2{grid-column:2/9}
+.sec .head .lede{grid-column:9/13;color:#3a3a3c;padding-bottom:.4vw}
+.sec .rule{margin-bottom:3vw}
+
+/* Status legend */
+.legend{display:grid;grid-template-columns:repeat(4,1fr);column-gap:2vw;row-gap:18px;max-width:1100px;margin-top:2.6vw}
+.legend .lg .chip{margin-bottom:10px}
+.legend .lg .p{font-size:14px;color:#3a3a3c}
+.howtxt{max-width:640px}
+
+/* Status chips */
+.chip{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:400;
+  letter-spacing:.05em;text-transform:uppercase;border-radius:999px;padding:4px 11px;white-space:nowrap}
+.chip i{width:6px;height:6px;border-radius:99px;display:inline-block;background:currentColor}
+.chip.live{background:var(--noir);color:var(--citron)}
+.chip.partial{background:var(--violette);color:var(--noir)}
+.chip.gated{background:transparent;color:var(--noir);border:1px solid var(--noir)}
+.chip.demo{background:transparent;color:var(--rhone);border:1px dashed var(--rhone)}
+
+/* Editorial rows for tabs, chapters and answers */
+.rows{border-top:1px solid var(--noir)}
+.row{border-bottom:1px solid var(--hair)}
+.row .top{display:grid;grid-template-columns:64px 1fr auto 40px;column-gap:2vw;align-items:center;
+  padding:1.35vw 0;cursor:pointer;user-select:none}
+.row .top:hover .rt{color:#000}
+.row .top .rn{color:var(--rhone)}
+.row .top .plus{justify-self:end;font-size:20px;font-weight:300;transition:transform .35s cubic-bezier(.075,.82,.165,1);color:var(--rhone)}
+.row.open .top .plus{transform:rotate(45deg);color:var(--noir)}
+.row .body{display:none;padding:.6vw 0 3.4vw}
+.row.open .body{display:block}
+
+/* Twelve column tab body */
+.tb{display:grid;grid-template-columns:repeat(12,1fr);column-gap:2vw;row-gap:2.4vw}
+.tb .colA{grid-column:1/6}
+.tb .colB{grid-column:6/13}
+.blk{margin-bottom:2vw}
+.blk .bl{color:var(--rhone);margin-bottom:12px;display:flex;gap:10px;align-items:center}
+.blk .bl:after{content:"";flex:1;height:1px;background:var(--hair)}
+.resumo{font-size:clamp(16px,1.25vw,20px);line-height:1.4;margin-bottom:2vw}
+.socio{background:#e7e2f2;padding:18px 20px 20px;margin-top:2vw}
+.socio .bl{color:#5b4a7a}
+.socio .bl:after{background:rgba(91,74,122,.25)}
+.cem li{display:flex;gap:12px;padding:7px 0;list-style:none;align-items:baseline}
+.cem li:before{content:"";width:8px;height:8px;background:var(--citron);border:1px solid var(--noir);flex-shrink:0;transform:translateY(1px)}
+.passo{display:grid;grid-template-columns:56px 1fr;column-gap:2vw;padding:12px 0;border-bottom:1px solid var(--hair)}
+.passo .pk{color:var(--rhone)}
+.passo .pt1{font-weight:400;margin-bottom:5px}
+.kv{display:grid;grid-template-columns:repeat(4,1fr);column-gap:2vw;row-gap:1.6vw;margin-top:2.4vw;
+  border-top:1px solid var(--hair);padding-top:1.6vw}
+.kv .k .bl{margin-bottom:8px}
+.kv .k .p{font-size:13.5px;color:#2e2e30}
+.lim{list-style:none;columns:2;column-gap:2vw}
+.lim li{display:flex;gap:12px;padding:7px 0;font-size:14.5px;line-height:1.35;color:#2e2e30;break-inside:avoid}
+.lim li:before{content:"·";color:var(--rhone);flex-shrink:0}
+.riscos .lim,.notas .lim{columns:1}
+details.prv{margin-top:1.6vw}
+details.prv summary{cursor:pointer;list-style:none;display:inline-flex;gap:10px;align-items:center;
+  font-size:12px;font-weight:400;letter-spacing:.02em;text-transform:uppercase;color:var(--rhone)}
+details.prv summary:before{content:"+";font-size:15px}
+details.prv[open] summary:before{content:"−"}
+details.prv .rows2{margin-top:14px;border-top:1px solid var(--hair)}
+details.prv .r2{display:grid;grid-template-columns:1fr 1fr;column-gap:2vw;padding:9px 0;border-bottom:1px solid var(--hair);font-size:13.5px}
+details.prv .r2 .ev{color:var(--rhone);word-break:break-all}
+
+/* Infrastructure items */
+.it{padding:1.4vw 0;border-bottom:1px solid var(--hair)}
+.it .it-h{display:grid;grid-template-columns:64px 1fr;column-gap:2vw;margin-bottom:10px}
+.it .it-h .rn{color:var(--rhone)}
+.it .it-b{display:grid;grid-template-columns:64px 1fr;column-gap:2vw}
+.it .it-desc{margin-bottom:14px;max-width:760px}
+.it .meta{display:grid;grid-template-columns:repeat(4,1fr);column-gap:2vw;row-gap:12px}
+.it .meta .bl{margin-bottom:6px}
+.it .meta .p{font-size:13.5px;color:#2e2e30}
+.riscos{margin-top:1.6vw}
+
+/* Meeting answers */
+.ans .body .p{max-width:820px;margin-bottom:14px}
+
+/* Black band for intentionally disabled features */
+.band{background:var(--noir);color:var(--alpin);padding:6vw 2vw 5vw;margin-top:6vw}
+.band .head{display:grid;grid-template-columns:repeat(12,1fr);column-gap:2vw;align-items:baseline;margin-bottom:3vw}
+.band .head .hn{grid-column:1/2;color:var(--citron)}
+.band .head h2{grid-column:2/9}
+.band .head .lede{grid-column:9/13;color:var(--leman)}
+.band .off{display:grid;grid-template-columns:64px 1fr;column-gap:2vw;padding:1.8vw 0;border-top:1px solid rgba(255,255,255,.18)}
+.band .off .rn{color:var(--citron)}
+.band .off .p{color:var(--leman);max-width:760px;margin-top:8px}
+.band .outro{color:var(--rhone);max-width:640px;margin-top:3vw}
+
+/* Handover */
+.step{display:grid;grid-template-columns:64px 1fr auto;column-gap:2vw;padding:1.8vw 0;border-bottom:1px solid var(--hair);align-items:start}
+.step .rn{color:var(--rhone)}
+.step .p{max-width:760px;margin-top:8px;color:#2e2e30}
+.step .owner{border:1px solid var(--noir);border-radius:999px;padding:5px 12px;font-size:11px;
+  letter-spacing:.04em;text-transform:uppercase;font-weight:400;white-space:nowrap;justify-self:end}
+
+/* Footer */
+.foot{background:var(--noir);color:var(--alpin);padding:7vw 2vw 2vw;margin-top:0}
+.foot .f-big{color:var(--citron);margin-bottom:4vw;word-break:break-word}
+.foot .f-grid{display:grid;grid-template-columns:repeat(4,1fr);column-gap:2vw;row-gap:14px;
+  border-top:1px solid rgba(255,255,255,.18);padding-top:16px;color:var(--leman)}
+.foot .f-grid .grey{color:var(--rhone)}
+
+.hid{display:none !important}
+
+/* Mobile layout */
+@media (max-width:820px){
+  .margin,.nav,.hero,.sec,.band,.foot{padding-left:5vw;padding-right:5vw}
+  .idx{padding-left:5vw;padding-right:5vw;gap:16px;overflow-x:auto;flex-wrap:nowrap;scrollbar-width:none}
+  .idx::-webkit-scrollbar{display:none}
+  .hero .h-grid,.sec .head,.band .head{grid-template-columns:1fr;row-gap:14px}
+  .hero .h-sub,.hero .h-note,.sec .head h2,.sec .head .lede,.band .head h2,.band .head .lede{grid-column:auto;max-width:none}
+  .stats .st-grid{grid-template-columns:1fr 1fr}
+  .stats .st:nth-child(2){border-right:0}
+  .legend{grid-template-columns:1fr 1fr}
+  .row .top{grid-template-columns:40px 1fr auto 26px;column-gap:3vw;padding:16px 0}
+  .tb{grid-template-columns:1fr}
+  .tb .colA,.tb .colB{grid-column:auto}
+  .kv{grid-template-columns:1fr}
+  .lim{columns:1}
+  .it .it-h,.it .it-b,.passo,.step,.band .off{grid-template-columns:40px 1fr}
+  .it .meta{grid-template-columns:1fr 1fr}
+  .step .owner{grid-column:2;justify-self:start;margin-top:10px}
+  details.prv .r2{grid-template-columns:1fr;row-gap:4px}
+  .foot .f-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- Access gate -->
+<div id="gate">
+  <div class="g-top">
+    <img src="/brand/abil-mark-citron-tight.png" alt="ABiL MEDiAS" style="height:22px;width:auto">
+    <span class="xxs" style="color:var(--rhone)" id="g-date"></span>
+  </div>
+  <div class="g-mid">
+    <div class="xxs" id="g-label" style="color:var(--rhone);margin-bottom:26px">INTERNAL DOSSIER · ENTER ACCESS CODE</div>
+    <div class="xl">Dossier<br>ABiL.</div>
+    <div class="g-form">
+      <input id="g-in" type="password" autocomplete="off" autocapitalize="none" spellcheck="false" aria-label="Access code">
+      <button class="g-go" id="g-go">Enter</button>
+    </div>
+    <div class="g-err xxs" id="g-err"></div>
+  </div>
+  <div class="g-foot xxs"><span>ABIL.CH</span><span>GENÈVE</span></div>
+</div>
+
+<!-- Document -->
+<div id="app" class="hid">
+  <nav class="nav">
+    <div class="n-logo"><img src="/brand/abil-mark-black-tight.png" alt="ABiL MEDiAS"></div>
+    <div class="n-doc xxs"><span id="n-doc"></span></div>
+    <div class="n-langs" id="langs"></div>
+  </nav>
+
+  <header class="hero io">
+    <div class="kick xxs io in"><span class="dot"></span><span id="h-kick"></span></div>
+    <h1 class="xl" id="h-title"></h1>
+    <div class="h-grid">
+      <p class="p h-sub fadeup" id="h-sub" style="--d:.15s"></p>
+      <p class="xxs h-note fadeup" id="h-note" style="--d:.3s"></p>
+    </div>
+    <div class="stats io" id="stats"></div>
+  </header>
+
+  <nav class="idx" id="idx"></nav>
+
+  <main id="main"></main>
+
+  <footer class="foot">
+    <div class="l f-big">support@abil.ch</div>
+    <div class="f-grid xxs">
+      <div>ABIL.CH</div>
+      <div>+41 22 548 00 40</div>
+      <div>59 RUE DE BERNE, 1201 GENÈVE</div>
+      <div class="grey" id="f-tag"></div>
+    </div>
+  </footer>
+</div>
+
+<script src="./content.js"></script>
+<script>
+(function(){
+  var D=window.DOSSIER; if(!D){document.getElementById('g-label').textContent='CONTENT MISSING';return}
+
+  /* Encrypted content per language. AES-GCM uses a key derived from the access
+     code with PBKDF2, so the files cannot be read without that code and the
+     code is never stored in clear text on this page. */
+  var CODE=null, aCarregar={};
+  function b64bytes(s){var bin=atob(s),u=new Uint8Array(bin.length);for(var i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u}
+  function decifra(buf,cb,fail){
+    var u=new Uint8Array(buf), salt=u.slice(0,16), iv=u.slice(16,28), ct=u.slice(28);
+    crypto.subtle.importKey('raw',new TextEncoder().encode(CODE),'PBKDF2',false,['deriveKey'])
+    .then(function(km){return crypto.subtle.deriveKey(
+      {name:'PBKDF2',salt:salt,iterations:150000,hash:'SHA-256'},km,
+      {name:'AES-GCM',length:256},false,['decrypt'])})
+    .then(function(k){return crypto.subtle.decrypt({name:'AES-GCM',iv:iv},k,ct)})
+    .then(function(pt){cb(JSON.parse(new TextDecoder().decode(pt)))})
+    .catch(function(){fail()});
+  }
+  // WebCrypto is available only in a secure context such as HTTPS or localhost.
+  // Report that requirement instead of showing a misleading wrong code error.
+  var TEM_CRYPTO=!!(window.crypto&&window.crypto.subtle);
+  function loadLang(l,cb){
+    if(D.langs[l]){cb(true);return}
+    if(aCarregar[l]){aCarregar[l].push(cb);return}
+    aCarregar[l]=[cb];
+    fetch('./content.'+l+'.enc',{cache:'no-store'}).then(function(r){
+      if(!r.ok)throw 0;return r.arrayBuffer();
+    }).then(function(buf){
+      decifra(buf,function(obj){
+        D.langs[l]=obj;
+        var fila=aCarregar[l]||[];delete aCarregar[l];fila.forEach(function(f){f(true)});
+      },function(){
+        var fila=aCarregar[l]||[];delete aCarregar[l];fila.forEach(function(f){f(false)});
+      });
+    }).catch(function(){
+      var fila=aCarregar[l]||[];delete aCarregar[l];fila.forEach(function(f){f(false)});
+    });
+  }
+
+  /* Access gate */
+  var gate=document.getElementById('gate'), app=document.getElementById('app');
+  document.getElementById('g-date').textContent=new Date().toISOString().slice(0,10);
+  var gateBusy=false, gateButton=document.getElementById('g-go');
+  function setGateBusy(busy){
+    gateBusy=busy;gateButton.disabled=busy;gateButton.textContent=busy?'CHECKING…':'Enter';
+  }
+  function normalizaCodigo(valor){
+    var s=String(valor||'');
+    if(s.normalize)s=s.normalize('NFKC');
+    return s.trim().replace(/[\u200B-\u200D\u2060\uFEFF]/g,'').replace(/^["'`´‘’“”]+|["'`´‘’“”]+$/g,'').toLowerCase();
+  }
+  function abrir(){
+    gate.classList.add('hid');app.classList.remove('hid');
+    var fila=[cur].concat(LANGS.filter(function(l){return l!==cur}));
+    (function tenta(i){
+      if(i>=fila.length){
+        if(!D.langs[cur]){
+          sessionStorage.removeItem('abil_dossier_code');CODE=null;
+          app.classList.add('hid');gate.classList.remove('hid');setGateBusy(false);
+          document.getElementById('g-err').textContent=D.meta.codeErr;return;
+        }
+        render();return;
+      }
+      loadLang(fila[i],function(ok){ if(ok){cur=fila[i];render()} else tenta(i+1) });
+    })(0);
+  }
+  function tryCode(){
+    if(gateBusy)return;
+    if(!TEM_CRYPTO){
+      document.getElementById('g-err').textContent='THIS BROWSER CANNOT DECRYPT OVER HTTP · OPEN IN CHROME OR USE THE HTTPS LINK';
+      return;
+    }
+    CODE=normalizaCodigo(document.getElementById('g-in').value);
+    if(!CODE){document.getElementById('g-err').textContent=D.meta.codeErr;return}
+    document.getElementById('g-err').textContent='';setGateBusy(true);
+    // Try the selected language first, then every other available language.
+    // Only report a wrong code after none of the payloads can be decrypted.
+    var fila=[cur].concat(LANGS.filter(function(l){return l!==cur}));
+    (function tenta(i){
+      if(i>=fila.length){CODE=null;setGateBusy(false);document.getElementById('g-err').textContent=D.meta.codeErr;return}
+      loadLang(fila[i],function(ok){
+        if(ok){cur=fila[i];setGateBusy(false);sessionStorage.setItem('abil_dossier_code',CODE);abrir()}
+        else tenta(i+1);
+      });
+    })(0);
+  }
+  document.getElementById('g-go').onclick=tryCode;
+  document.getElementById('g-in').addEventListener('keydown',function(e){if(e.key==='Enter')tryCode()});
+
+  /* Language selection.
+     Only request files declared by the builder in langsDisponiveis. The SPA
+     rewrite returns this page with status 200 for a missing file, so the
+     manifest prevents an unpublished language from breaking access. */
+  var LANGS=(D.meta.langsDisponiveis&&D.meta.langsDisponiveis.length)
+    ? D.meta.langsDisponiveis : ['en','fr','pt','de','it'];
+  var cur=localStorage.getItem('abil_dossier_lang')||'en';
+  if(LANGS.indexOf(cur)<0)cur=LANGS[0];
+  var langsEl=document.getElementById('langs');
+  LANGS.forEach(function(l){
+    var b=document.createElement('button');b.textContent=l.toUpperCase();
+    b.onclick=function(){cur=l;localStorage.setItem('abil_dossier_lang',l);loadLang(l,function(){render()})};
+    b.dataset.l=l;langsEl.appendChild(b);
+  });
+
+  /* Utilities */
+  function el(tag,cls,html){var e=document.createElement(tag);if(cls)e.className=cls;if(html!=null)e.innerHTML=html;return e}
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  function nn(i){return String(i).padStart(2,'0')}
+  var io=null;
+  function observar(){
+    if(io)io.disconnect();
+    io=new IntersectionObserver(function(es){
+      es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
+    },{threshold:0,rootMargin:'0px 0px -6% 0px'});
+    document.querySelectorAll('.io').forEach(function(n){io.observe(n)});
+  }
+
+  function chip(status,ui){
+    var map={funcional:'live',parcial:'partial',demonstracao:'demo',gated:'gated'};
+    var k=map[status]||status;
+    return '<span class="chip '+k+'"><i></i>'+esc(ui.chips[k]||k)+'</span>';
+  }
+  function bloco(rotulo){var b=el('div','blk');b.appendChild(el('div','bl xxs',esc(rotulo)));return b}
+  function provasEl(provas,ui){
+    var d=el('details','prv');
+    d.appendChild(el('summary',null,esc(ui.proofs)+' ('+provas.length+')'));
+    var rs=el('div','rows2');
+    provas.forEach(function(p){
+      rs.appendChild(el('div','r2','<span class="p" style="font-size:13.5px">'+esc(p.afirmacao)+'</span>'+
+        '<span class="mono ev">'+esc(p.evidencia)+'</span>'));
+    });
+    d.appendChild(rs);return d;
+  }
+  function toggleRow(r){r.querySelector('.top').addEventListener('click',function(){r.classList.toggle('open')})}
+
+  /* Dashboard tab card */
+  function tabRow(t,i,ui){
+    var r=el('article','row');
+    r.appendChild(el('div','top',
+      '<span class="rn xxs">'+nn(i)+'</span>'+
+      '<h3 class="s rt">'+esc(t.label||t.id)+'</h3>'+
+      chip(t.estado,ui)+'<span class="plus">+</span>'));
+    var b=el('div','body'),g=el('div','tb');
+
+    var A=el('div','colA');
+    A.appendChild(el('p','p resumo',esc(t.resumo)));
+    if(t.paraCemPorCento&&t.paraCemPorCento.length){
+      var c=bloco(ui.to100||'To 100%');
+      var ul=el('ul','cem p');t.paraCemPorCento.forEach(function(x){ul.appendChild(el('li',null,esc(x)))});
+      c.appendChild(ul);A.appendChild(c);
+    }
+    if(t.paraOSocio){
+      var sc=el('div','socio');
+      sc.appendChild(el('div','bl xxs',esc(ui.socio||'Note')));
+      sc.appendChild(el('p','p',esc(t.paraOSocio)));
+      A.appendChild(sc);
+    }
+    g.appendChild(A);
+
+    var B=el('div','colB');
+    if(t.comoFunciona&&t.comoFunciona.length){
+      var cf=bloco(ui.how);
+      t.comoFunciona.forEach(function(sp,j){
+        cf.appendChild(el('div','passo',
+          '<span class="pk xxs">'+nn(j+1)+'</span>'+
+          '<div><div class="xs pt1">'+esc(sp.passo)+'</div><p class="p" style="font-size:14.5px;color:#2e2e30">'+esc(sp.detalhe)+'</p></div>'));
+      });
+      B.appendChild(cf);
+    }
+    g.appendChild(B);
+    b.appendChild(g);
+
+    var kv=el('div','kv');
+    [[ui.stores,t.oQueGrava],[ui.auto,t.automatismos],[ui.today,t.dadosReaisHoje],
+     [ui.links,(t.ligacoes||[]).join(' · ')]].forEach(function(par){
+      if(!par[1])return;
+      var k=el('div','k');k.appendChild(el('div','bl xxs',esc(par[0])));
+      k.appendChild(el('p','p',esc(par[1])));kv.appendChild(k);
+    });
+    b.appendChild(kv);
+    if(t.limites&&t.limites.length){
+      var lb=bloco(ui.limits);
+      var ul2=el('ul','lim');t.limites.forEach(function(x){ul2.appendChild(el('li',null,esc(x)))});
+      lb.appendChild(ul2);lb.style.marginTop='2.4vw';b.appendChild(lb);
+    }
+    if(t.provas&&t.provas.length)b.appendChild(provasEl(t.provas,ui));
+    r.appendChild(b);toggleRow(r);
+    return r;
+  }
+
+  /* Infrastructure chapter */
+  function infraRow(ch,i,ui){
+    var r=el('article','row');
+    r.appendChild(el('div','top',
+      '<span class="rn xxs">'+nn(i)+'</span>'+
+      '<h3 class="s rt">'+esc(ch.title)+'</h3><span></span><span class="plus">+</span>'));
+    var b=el('div','body');
+    b.appendChild(el('p','p resumo',esc(ch.resumo)));
+    (ch.itens||[]).forEach(function(it,j){
+      var d=el('div','it');
+      d.appendChild(el('div','it-h','<span class="rn xxs">'+nn(j+1)+'</span><h4 class="xs" style="font-weight:400">'+esc(it.nome)+'</h4>'));
+      var body=el('div','it-b');body.appendChild(el('span',null,''));
+      var inner=el('div');
+      inner.appendChild(el('p','p it-desc',esc(it.oQueE)));
+      var meta=el('div','meta');
+      [[ui.thWhere,it.onde],[ui.thOwner,it.deQuemE],[ui.seFaltar||'If missing',it.seFaltar],[ui.thAction,it.accaoNecessaria]].forEach(function(par){
+        if(!par[1])return;
+        var k=el('div');k.appendChild(el('div','bl xxs',esc(par[0])));
+        k.appendChild(el('p','p',esc(par[1])));meta.appendChild(k);
+      });
+      inner.appendChild(meta);body.appendChild(inner);d.appendChild(body);
+      b.appendChild(d);
+    });
+    if(ch.riscos&&ch.riscos.length){
+      var rb=bloco(ui.risks||'Risks');rb.className='blk riscos';
+      rb.appendChild(el('div','bl xxs',''));rb.firstChild.textContent=ui.risks||'Risks';
+      var ul=el('ul','lim');ch.riscos.forEach(function(x){ul.appendChild(el('li',null,esc(x)))});
+      rb.appendChild(ul);b.appendChild(rb);
+    }
+    if(ch.provas&&ch.provas.length)b.appendChild(provasEl(ch.provas,ui));
+    r.appendChild(b);toggleRow(r);
+    return r;
+  }
+
+  /* Continuity chapter */
+  function contRow(ch,i,ui){
+    var r=el('article','row');
+    r.appendChild(el('div','top',
+      '<span class="rn xxs">'+nn(i)+'</span>'+
+      '<h3 class="s rt">'+esc(ch.titulo)+'</h3><span></span><span class="plus">+</span>'));
+    var b=el('div','body');
+    b.appendChild(el('p','p resumo',esc(ch.resumo)));
+    (ch.passos||[]).forEach(function(sp,j){
+      b.appendChild(el('div','passo',
+        '<span class="pk xxs">'+nn(j+1)+'</span>'+
+        '<div><div class="xs pt1">'+esc(sp.passo)+'</div><p class="p" style="font-size:14.5px;color:#2e2e30;white-space:pre-line">'+esc(sp.detalhe)+'</p></div>'));
+    });
+    if(ch.notas&&ch.notas.length){
+      var nb=bloco(ui.notes||'Notes');nb.style.marginTop='2vw';
+      var ul=el('ul','lim');ch.notas.forEach(function(x){ul.appendChild(el('li',null,esc(x)))});
+      nb.appendChild(ul);b.appendChild(nb);
+    }
+    if(ch.provas&&ch.provas.length)b.appendChild(provasEl(ch.provas,ui));
+    r.appendChild(b);toggleRow(r);
+    return r;
+  }
+
+  /* Render */
+  function render(){
+    var L=D.langs[cur]||D.langs.en||D.langs[Object.keys(D.langs)[0]];
+    if(!L)return;
+    var ui=L.ui;
+    document.documentElement.lang=cur;
+    langsEl.querySelectorAll('button').forEach(function(b){b.classList.toggle('on',b.dataset.l===cur)});
+
+    document.getElementById('h-kick').textContent=L.hero.kick;
+    document.getElementById('n-doc').textContent=L.hero.kick;
+    document.getElementById('h-title').innerHTML=esc(L.hero.title).replace(/\n/g,'<br>');
+    document.getElementById('h-sub').textContent=L.hero.sub;
+    document.getElementById('h-note').textContent=L.hero.note||'';
+    document.getElementById('g-label').textContent=D.meta.gateLabel;
+    document.getElementById('f-tag').textContent=(L.hero.kick||'').replace(/·/g,'·');
+
+    /* Hero statistics measured from the content itself */
+    var nTabs=0,nProv=0;
+    L.dash.groups.forEach(function(g){g.tabs.forEach(function(t){nTabs++;nProv+=(t.provas||[]).length})});
+    L.infra.chapters.forEach(function(c){nProv+=(c.provas||[]).length});
+    if(L.continuidade)(L.continuidade.chapters||[]).forEach(function(c){nProv+=(c.provas||[]).length});
+    var st=document.getElementById('stats');st.innerHTML='';
+    var sg=el('div','st-grid');
+    [[nTabs,ui.stats&&ui.stats.tabs],[L.infra.chapters.length+(L.continuidade?L.continuidade.chapters.length:0),ui.stats&&ui.stats.chapters],
+     [nProv,ui.stats&&ui.stats.proofs],[5,ui.stats&&ui.stats.langs]].forEach(function(par){
+      if(!par[1])return;
+      var s=el('div','st fadeup');s.appendChild(el('div','m',esc(String(par[0]))));
+      s.appendChild(el('div','xxs',esc(par[1])));sg.appendChild(s);
+    });
+    st.appendChild(sg);
+
+    var idx=document.getElementById('idx');idx.innerHTML='';
+    var main=document.getElementById('main');main.innerHTML='';
+    var num=0;
+    function section(id,title,lede,build,opts){
+      num++;
+      var a=el('a','lnk','<span class="num">'+nn(num)+'</span>'+esc(title));a.href='#'+id;idx.appendChild(a);
+      var s=el('section',(opts&&opts.band)?'band io':'sec io');s.id=id;
+      var head=el('div','head');
+      head.appendChild(el('span','hn xxs',nn(num)));
+      head.appendChild(el('h2','m','<span class="wm"><span class="w">'+esc(title)+'</span></span>'));
+      if(lede)head.appendChild(el('p','p lede',esc(lede)));
+      s.appendChild(head);
+      if(!(opts&&opts.band))s.appendChild(el('div','fillw rule'));
+      build(s);main.appendChild(s);
+    }
+
+    /* 01, how to read */
+    section('howto',L.howto.title,null,function(s){
+      s.appendChild(el('p','p howtxt fadeup',esc(L.howto.text)));
+      var lg=el('div','legend');
+      ['live','partial','gated','demo'].forEach(function(k){
+        if(!ui.chips[k]||!L.howto.chipDesc[k])return;
+        lg.appendChild(el('div','lg fadeup','<span class="chip '+k+'"><i></i>'+esc(ui.chips[k])+'</span>'+
+          '<p class="p">'+esc(L.howto.chipDesc[k])+'</p>'));
+      });
+      s.appendChild(lg);
+    });
+
+    /* 02, meeting answers */
+    section('answers',L.answers.title,L.answers.lede||null,function(s){
+      var rows=el('div','rows ans');
+      L.answers.items.forEach(function(a,i){
+        var r=el('article','row');
+        r.appendChild(el('div','top',
+          '<span class="rn xxs">'+nn(i+1)+'</span><h3 class="s rt">'+esc(a.title)+'</h3><span></span><span class="plus">+</span>'));
+        var b=el('div','body');
+        a.paras.forEach(function(p){b.appendChild(el('p','p',esc(p)))});
+        r.appendChild(b);toggleRow(r);rows.appendChild(r);
+      });
+      s.appendChild(rows);
+    });
+
+    /* 03, dashboard tab by tab */
+    section('dash',L.dash.title,L.dash.lede,function(s){
+      var i=0;
+      L.dash.groups.forEach(function(g){
+        var gh=el('div',null,'<div class="xxs grey" style="margin:3vw 0 6px">'+esc(g.kicker)+'</div>'+
+          '<h3 class="m" style="margin-bottom:1.4vw">'+esc(g.title)+'</h3>');
+        s.appendChild(gh);
+        var rows=el('div','rows');
+        g.tabs.forEach(function(t){rows.appendChild(tabRow(t,++i,ui))});
+        s.appendChild(rows);
+      });
+    });
+
+    /* 04, infrastructure */
+    section('infra',L.infra.title,L.infra.lede,function(s){
+      var rows=el('div','rows');
+      L.infra.chapters.forEach(function(ch,i){rows.appendChild(infraRow(ch,i+1,ui))});
+      s.appendChild(rows);
+    });
+
+    /* 05, continuity and migration */
+    if(L.continuidade&&L.continuidade.chapters&&L.continuidade.chapters.length){
+      section('cont',L.continuidade.title,L.continuidade.lede,function(s){
+        var rows=el('div','rows');
+        L.continuidade.chapters.forEach(function(ch,i){rows.appendChild(contRow(ch,i+1,ui))});
+        s.appendChild(rows);
+      });
+    }
+
+    /* 06, intentionally disabled features */
+    section('off',L.off.title,L.off.intro,function(s){
+      L.off.items.forEach(function(o,i){
+        s.appendChild(el('div','off',
+          '<span class="rn m">'+nn(i+1)+'</span>'+
+          '<div><div class="s">'+esc(o.t)+'</div><p class="p">'+esc(o.d)+'</p></div>'));
+      });
+      s.appendChild(el('p','p outro',esc(L.off.outro)));
+    },{band:true});
+
+    /* 07, handover */
+    section('handover',L.handover.title,L.handover.intro,function(s){
+      var st2=el('div','rows');
+      L.handover.steps.forEach(function(h,i){
+        st2.appendChild(el('div','step',
+          '<span class="rn m">'+nn(i+1)+'</span>'+
+          '<div><div class="s">'+esc(h.t)+'</div><p class="p">'+esc(h.d)+'</p></div>'+
+          (h.owner?'<span class="owner">'+esc(h.owner)+'</span>':'')));
+      });
+      s.appendChild(st2);
+    });
+
+    observar();
+  }
+
+  // Restore an unlocked session only after every handler has been initialised.
+  var guardado=sessionStorage.getItem('abil_dossier_code');
+  if(guardado){CODE=guardado;abrir()}
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "installCommand": "pnpm install",
+  "images": {
+    "sizes": [
+      384,
+      640,
+      750,
+      828,
+      1080,
+      1200,
+      1920
+    ],
+    "remotePatterns": [
+      {
+        "protocol": "https",
+        "hostname": "d1vtit0cxozsxwqh.public.blob.vercel-storage.com"
+      }
+    ],
+    "minimumCacheTTL": 2678400,
+    "formats": [
+      "image/webp"
+    ]
+  },
+  "redirects": [
+    {
+      "source": "/v3",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/v3/(.*)",
+      "destination": "/$1",
+      "permanent": true
+    },
+    {
+      "source": "/v2",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/travaux",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/travaux/(.*)",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/projects",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/projects/(.*)",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/project/(.*)",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/work/(.*)",
+      "destination": "/projets",
+      "permanent": true
+    },
+    {
+      "source": "/blog",
+      "destination": "/journal",
+      "permanent": true
+    },
+    {
+      "source": "/blog/(.*)",
+      "destination": "/journal",
+      "permanent": true
+    },
+    {
+      "source": "/expertises",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/atelier",
+      "destination": "/agence",
+      "permanent": true
+    },
+    {
+      "source": "/briefing",
+      "destination": "/contact",
+      "permanent": true
+    },
+    {
+      "source": "/legal",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/mentions",
+      "destination": "/conditions",
+      "permanent": true
+    },
+    {
+      "source": "/privacy",
+      "destination": "/confidentialite",
+      "permanent": true
+    },
+    {
+      "source": "/cookies",
+      "destination": "/confidentialite",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/api/sitemap"
+    },
+    {
+      "source": "/audit/:slug",
+      "destination": "/api/audit?slug=:slug"
+    },
+    {
+      "source": "/((?!api/|_vercel/).*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' blob: 'wasm-unsafe-eval' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://use.typekit.net https://p.typekit.net https://fonts.googleapis.com; font-src 'self' data: https://use.typekit.net https://p.typekit.net https://fonts.gstatic.com; img-src 'self' data: blob: https://d1vtit0cxozsxwqh.public.blob.vercel-storage.com https://*.public.blob.vercel-storage.com https://images.pexels.com https://www.google-analytics.com https://p.typekit.net; media-src 'self' data: blob: https://d1vtit0cxozsxwqh.public.blob.vercel-storage.com https://*.public.blob.vercel-storage.com; connect-src 'self' https://unpkg.com https://cdn.jsdelivr.net https://vercel.com https://blob.vercel-storage.com https://*.blob.vercel-storage.com https://*.public.blob.vercel-storage.com https://api.openai.com https://www.google-analytics.com https://use.typekit.net https://p.typekit.net wss://api.openai.com; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "abil-site-.*\\.vercel\\.app"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        },
+        {
+          "key": "Accept-Ranges",
+          "value": "bytes"
+        }
+      ]
+    },
+    {
+      "source": "/photos/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

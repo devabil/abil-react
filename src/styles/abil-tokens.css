@@ -1,0 +1,52 @@
+
+:root {
+
+  --ab-citron: #d2ff01;
+  --ab-noir: #0a0a0b;
+  --ab-rhone: #7e7e7e;
+  --ab-leman: #c7c7c7;
+  --ab-alpin: #ffffff;
+
+
+  --ab-t-display: clamp(52px, 8.53vw, 164px);
+  --ab-t-h2: clamp(34px, 4.58vw, 88px);
+  --ab-t-ticker: clamp(20px, 2.38vw, 45.6px);
+  --ab-t-close: clamp(19px, 1.95vw, 37.5px);
+  --ab-t-nav: clamp(16px, 1.73vw, 33.3px);
+  --ab-t-lead: clamp(15px, 1.32vw, 25.4px);
+  --ab-t-ui: 15px;
+  --ab-t-meta: 12px;
+  --ab-ls-meta: 0.14em;
+
+
+  --ab-mx: clamp(20px, 4.96vw, 95px);
+  --ab-tick-gap: 1.98vw;
+  --ab-s-1: 4px;  --ab-s-2: 8px;  --ab-s-3: 12px; --ab-s-4: 16px; --ab-s-5: 24px;
+  --ab-s-6: 32px; --ab-s-7: 48px; --ab-s-8: 64px; --ab-s-9: 96px; --ab-s-10: 150px;
+
+
+  --ab-d-tap: 160ms;
+  --ab-d-hover: 320ms;
+  --ab-d-reveal: 560ms;
+  --ab-d-hero: 900ms;
+  --ab-e-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ab-e-hover: cubic-bezier(0.33, 1, 0.68, 1);
+  --ab-stagger: 100ms;
+
+
+  --ab-r-0: 0;
+  --ab-r-pill: 999px;
+  --ab-r-icon: 8.6%;
+}
+@media (prefers-reduced-motion: reduce) {
+  :root { --ab-d-tap: 0ms; --ab-d-hover: 0ms; --ab-d-reveal: 0ms; --ab-d-hero: 0ms; --ab-stagger: 0ms; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    transition-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

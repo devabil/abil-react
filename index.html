@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="fr" class="dark">
+  <head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate icon" href="/favicon.ico" sizes="any" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>ABiL MEDiAS · Vraiment habiles</title>
+    <meta name="description" content="ABiL MEDiAS, agence de communication à Genève. Branding, digital, publicité. Vraiment habiles." />
+
+    <meta name="google-site-verification" content="rcONEHoqt--sJO5HyCvU2k9TGgTHeWRcjFO9LdRD1Vk" />
+
+    <link rel="canonical" href="https://abil-site.vercel.app/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://abil-site.vercel.app/" />
+    <meta property="og:site_name" content="ABiL MEDiAS" />
+    <meta property="og:title" content="ABiL MEDiAS · Vraiment habiles" />
+    <meta property="og:description" content="Atelier créatif. Stratégie, direction artistique, production, activation. Pour les marques qui ne pensent jamais petit." />
+    <meta property="og:image" content="https://abil-site.vercel.app/og-abil.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="ABiL MEDiAS, agence de communication à Genève." />
+    <meta property="og:locale" content="fr_CH" />
+
+    <meta property="og:locale:alternate" content="en_US" />
+    <meta property="og:locale:alternate" content="de_CH" />
+    <meta property="og:locale:alternate" content="it_CH" />
+    <meta property="og:locale:alternate" content="pt_PT" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="ABiL MEDiAS · Vraiment habiles" />
+    <meta name="twitter:description" content="Atelier créatif. Stratégie, direction artistique, production, activation." />
+    <meta name="twitter:image" content="https://abil-site.vercel.app/og-abil.jpg" />
+    <meta name="twitter:image:alt" content="ABiL MEDiAS, agence de communication à Genève." />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "ABiL MEDiAS",
+        "legalName": "AMD COMMUNICATION Sàrl",
+        "url": "https://abil-site.vercel.app/",
+        "description": "Atelier créatif. Stratégie, direction artistique, production, activation pour les marques qui ne pensent jamais petit.",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Rue de Berne 59",
+          "postalCode": "1201",
+          "addressLocality": "Genève",
+          "addressCountry": "CH"
+        },
+        "telephone": "+41 22 548 00 40",
+        "email": "sam@abil.ch",
+        "logo": "https://abil-site.vercel.app/apple-touch-icon.png",
+        "image": "https://abil-site.vercel.app/og-abil.jpg",
+        "sameAs": [
+          "https://www.instagram.com/abil.ch/",
+          "https://www.linkedin.com/company/abil-medias/"
+        ],
+        "areaServed": [
+          { "@type": "City", "name": "Genève" },
+          { "@type": "AdministrativeArea", "name": "Suisse romande" }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://use.typekit.net" crossorigin />
+    <link rel="preconnect" href="https://p.typekit.net" crossorigin />
+    <link rel="stylesheet" href="https://use.typekit.net/opg3hrq.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+    <script>
+      // Load typography preview fonts only on private routes that need them.
+      (function () {
+        var HREF = "https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@400;700&family=Allura&family=Bebas+Neue&family=Cormorant+Garamond:wght@400;600&family=Pacifico&family=Space+Grotesk:wght@400;600&family=Manrope:wght@400;600&family=Fredoka:wght@500;600&family=Press+Start+2P&family=Orbitron:wght@500;700&display=swap";
+        var PREVIEW_ROUTES = ["/briefing", "/dashboard", "/login"];
+        var loaded = false;
+        function loadPreviewFonts() {
+          if (loaded) return;
+          loaded = true;
+          var l = document.createElement("link");
+          l.rel = "stylesheet";
+          l.href = HREF;
+          document.head.appendChild(l);
+        }
+        function checkRoute() {
+          var p = location.pathname;
+          for (var i = 0; i < PREVIEW_ROUTES.length; i++) {
+            if (p === PREVIEW_ROUTES[i] || p.indexOf(PREVIEW_ROUTES[i] + "/") === 0) { loadPreviewFonts(); return; }
+          }
+        }
+        window.__abilLoadTypePreviewFonts = loadPreviewFonts;
+        ["pushState", "replaceState"].forEach(function (m) {
+          var orig = history[m];
+          history[m] = function () { var r = orig.apply(this, arguments); try { checkRoute(); } catch (e) { /* */ } return r; };
+        });
+        window.addEventListener("popstate", checkRoute);
+        checkRoute();
+      })();
+    </script>
+
+    <link rel="preload" as="image" href="/photos/banner-topo.webp" type="image/webp" />
+    <link rel="preload" as="image" href="/photos/foto-maior.webp" type="image/webp" />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

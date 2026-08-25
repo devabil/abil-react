@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Private dashboard and authentication routes are excluded from indexing.
+# The application also emits noindex metadata when these views are rendered.
+Disallow: /dashboard
+Disallow: /login
+Disallow: /admin
+
+Sitemap: https://abil-site.vercel.app/sitemap.xml
